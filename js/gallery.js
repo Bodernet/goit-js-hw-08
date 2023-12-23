@@ -97,13 +97,11 @@ function gandleGalleryClick(event) {
   const instance = basicLightbox.create(
     `
 	<div class="modal">
-    <a class="modal-link" href=${original}>
-      <img
+        <img
         class="modal-image"
         src=${original}
         alt=${description}
       />
-    </a>
   </div>
 `,
     {
@@ -122,4 +120,9 @@ function gandleGalleryClick(event) {
       instance.close();
     }
   }
+  const modalImage = instance.element().querySelector(".modal-image");
+
+  modalImage.addEventListener("click", () => {
+    instance.close();
+  });
 }
