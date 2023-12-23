@@ -65,9 +65,6 @@ const images = [
 ];
 
 const contGallery = document.querySelector(".gallery");
-const galleryItem = document.querySelector(".gallery-item");
-const galleryLink = document.querySelector(".gallery-link");
-const galleryImage = document.querySelector(".gallery-image");
 contGallery.innerHTML = createMarkup(images);
 function createMarkup(image) {
   return image
@@ -85,13 +82,44 @@ function createMarkup(image) {
     )
     .join("");
 }
-contGallery.style.display = "flex";
-contGallery.style.flexWrap = "wrap";
-contGallery.style.rowGap = "24px";
-contGallery.style.flexShrink = "0";
-contGallery.style.maxWidth = "1440px";
-// galleryLink.style.width = "360px";
-// galleryLink.style.height = "200px";
-galleryLink.style.margin = "0";
-galleryImage.style.maxWidth = "100%";
-galleryItem.style.width = "calc((100% - 48px) / 3)";
+
+contGallery.addEventListener("click", gandleGalleryClick);
+
+function gandleGalleryClick(event) {
+  event.preventDefault();
+
+  if (event.target === event.currentTarget) {
+    return;
+  }
+  const original = event.target.dataset.source;
+  const description = event.target.dataset.description;
+
+  const instance = basicLightbox.create(
+    `
+	<div class="modal">
+    <a class="modal-link" href=${original}>
+      <img
+        class="modal-image"
+        src=${original}
+        alt=${description}
+      />
+    </a>
+  </div>
+`,
+    {
+      onShow: (instance) => {
+        document.addEventListener("keydown", closeModalKey);
+      },
+      onClose: (instance) => {
+        document.removeEventListener("keydown", closeModalKey);
+      },
+    }
+  );
+  instance.show();
+
+  function closeModalKey(event) {
+    if (event.code === "Escape" && instance) {
+      instance.close();
+    }
+  }
+}
