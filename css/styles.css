@@ -38,6 +38,9 @@ img {
   height: 200px;
   display: block;
 }
+.gallery-image:hover {
+  cursor: url(""), auto;
+}
 .modal-image {
   width: 1112px;
   height: 640px;
