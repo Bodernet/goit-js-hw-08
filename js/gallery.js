@@ -70,12 +70,12 @@ function createMarkup(image) {
   return image
     .map(
       ({ preview, original, description }) => `<li class="gallery-item">
-    <a class="gallery-link" href=${original}>
+    <a class="gallery-link" href="${original}">
       <img
         class="gallery-image"
-        src=${preview}
-        data-source=${original}
-        alt=${description}
+        src="${preview}"
+        data-source="${original}"
+        alt="${description}"
       />
     </a>
   </li>`
@@ -83,9 +83,9 @@ function createMarkup(image) {
     .join("");
 }
 
-contGallery.addEventListener("click", gandleGalleryClick);
+contGallery.addEventListener("click", handleGalleryClick);
 
-function gandleGalleryClick(event) {
+function handleGalleryClick(event) {
   event.preventDefault();
 
   if (event.target === event.currentTarget) {
@@ -99,8 +99,8 @@ function gandleGalleryClick(event) {
 	<div class="modal">
         <img
         class="modal-image"
-        src=${original}
-        alt=${description}
+        src="${original}"
+        alt="${description}"
       />
   </div>
 `,
